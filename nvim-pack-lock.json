@@ -10,6 +10,10 @@
       "src": "https://github.com/saghen/blink.cmp",
       "version": "1.0.0 - 2.0.0"
     },
+    "bolt-server.nvim": {
+      "rev": "eda2d0c92154a7a3bdde63c05a1a91225228f7ce",
+      "src": "git@github.com:bolteu/bolt-server.nvim.git"
+    },
     "conform.nvim": {
       "rev": "016802de402556da54c36bd7359b441266b01cdd",
       "src": "https://github.com/stevearc/conform.nvim"
