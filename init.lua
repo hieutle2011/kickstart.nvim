@@ -353,6 +353,8 @@ do
   vim.pack.add { gh 'lewis6991/gitsigns.nvim' }
   local gitsigns = require 'gitsigns'
   gitsigns.setup {
+    current_line_blame = true, -- on by default; toggle with <leader>tb
+    current_line_blame_opts = { delay = 300 }, -- ms before blame shows after cursor stops
     signs = {
       add = { text = '+' }, ---@diagnostic disable-line: missing-fields
       change = { text = '~' }, ---@diagnostic disable-line: missing-fields
