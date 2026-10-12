@@ -1035,6 +1035,7 @@ do
   -- require 'custom.plugins.git'
 
   require 'custom.plugins.bolt-server'
+  require 'custom.plugins.lazygit'
 end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
