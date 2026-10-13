@@ -738,7 +738,7 @@ do
     -- clangd = {},
     -- gopls = {},
     -- pyright = {},
-    ts_ls = {}, -- TypeScript / JavaScript
+    -- ts_ls = {}, -- replaced by `tsc` below (repo uses TypeScript 7 native / tsgo)
     --
     -- Some languages (like rust) have entire language plugins that can be useful:
     --    https://github.com/mrcjkb/rustaceanvim
@@ -814,6 +814,10 @@ do
     vim.lsp.config(name, server)
     vim.lsp.enable(name)
   end
+
+  -- TypeScript / JavaScript via the native compiler's language server (`tsc --lsp`, TypeScript 7+).
+  -- nvim-lspconfig picks the workspace's node_modules/.bin/tsgo automatically; not a Mason package.
+  vim.lsp.enable 'tsc'
 end
 
 -- ============================================================
