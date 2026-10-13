@@ -11,6 +11,13 @@ vim.keymap.set('n', '\\', '<Cmd>Neotree reveal<CR>', { desc = 'NeoTree reveal', 
 
 require('neo-tree').setup {
   filesystem = {
+    follow_current_file = {
+      enabled = true, -- highlight the current buffer's file in the tree
+      leave_dirs_open = true,
+    },
+    filtered_items = {
+      hide_by_pattern = { '*.js', '*.js.map' }, -- press H in the tree to show hidden items again
+    },
     window = {
       mappings = {
         ['\\'] = 'close_window',
