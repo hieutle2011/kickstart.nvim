@@ -817,6 +817,26 @@ do
 
   -- TypeScript / JavaScript via the native compiler's language server (`tsc --lsp`, TypeScript 7+).
   -- nvim-lspconfig picks the workspace's node_modules/.bin/tsgo automatically; not a Mason package.
+  -- pnpm monorepos where each package has its own lockfile (e.g. admin-panel modules) make the
+  -- default root resolve to the package dir, which has no node_modules/.bin/tsc. Prefer the
+  -- pnpm workspace root when it ships a tsc binary; otherwise fall back to the default behaviour.
+  local default_tsc = vim.lsp.config.tsc
+  local function workspace_tsc(root)
+    local bin = root and vim.fs.joinpath(root, 'node_modules/.bin/tsc')
+    return bin and vim.fn.executable(bin) == 1 and bin or nil
+  end
+  vim.lsp.config('tsc', {
+    root_dir = function(bufnr, on_dir)
+      local ws = vim.fs.root(bufnr, 'pnpm-workspace.yaml')
+      if workspace_tsc(ws) then return on_dir(ws) end
+      return default_tsc.root_dir(bufnr, on_dir)
+    end,
+    cmd = function(dispatchers, config)
+      local bin = workspace_tsc((config or {}).root_dir)
+      if bin then return vim.lsp.rpc.start({ bin, '--lsp', '--stdio' }, dispatchers) end
+      return default_tsc.cmd(dispatchers, config)
+    end,
+  })
   vim.lsp.enable 'tsc'
 end
 
