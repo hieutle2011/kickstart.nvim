@@ -53,7 +53,7 @@ require('neo-tree').setup {
       leave_dirs_open = true,
     },
     filtered_items = {
-      hide_by_pattern = { '*.js', '*.js.map' }, -- press H in the tree to show hidden items again
+      hide_by_pattern = { '*.js', '*.js.map', '*.d.ts'}, -- press H in the tree to show hidden items again
     },
     window = {
       mappings = {
